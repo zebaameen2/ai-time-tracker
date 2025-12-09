@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Time Tracker</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Firebase compat SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+  <div id="app" class="min-h-screen p-6">
+
+    <header class="max-w-4xl mx-auto flex items-center justify-between mb-6">
+      <h1 class="text-2xl font-semibold">AI Time Tracker</h1>
+      <div id="authArea"></div>
+    </header>
+
+    <main class="max-w-4xl mx-auto">
+
+      <!-- Login Section -->
+      <section id="authSection" class="p-6 bg-white rounded-lg shadow-sm">
+        <h2 class="text-xl font-medium mb-3">Welcome — please sign in</h2>
+
+        <button id="googleSignIn" class="px-4 py-2 rounded bg-red-500 text-white w-full mb-4">
+          Sign in with Google
+        </button>
+
+        <input id="email" placeholder="Email" class="border rounded px-3 py-2 w-full mb-2" />
+        <input id="password" placeholder="Password" type="password" class="border rounded px-3 py-2 w-full" />
+
+        <div class="flex gap-2 mt-3">
+          <button id="emailSignIn" class="px-4 py-2 bg-indigo-600 text-white rounded w-1/2">Sign In</button>
+          <button id="emailSignUp" class="px-4 py-2 border rounded w-1/2">Create Account</button>
+        </div>
+      </section>
+
+      <!-- Main App Section -->
+      <section id="appSection" class="hidden">
+        <h2 class="text-xl font-medium my-4">Track Your Time</h2>
+
+        <div>
+          <label>Select Date</label>
+          <input id="datePicker" type="date" class="border px-3 py-2 rounded" />
+        </div>
+
+        <div class="mt-4">
+          Remaining: <span id="remaining">1440</span> minutes
+        </div>
+
+        <div id="activitiesList" class="mt-4"></div>
+
+        <div class="flex gap-2 mt-4">
+          <input id="actName" placeholder="Activity" class="border px-3 py-2 rounded flex-1" />
+          <input id="actCat" placeholder="Category" class="border px-3 py-2 rounded" />
+          <input id="actMin" type="number" placeholder="Minutes" class="border px-3 py-2 rounded w-24" />
+          <button id="addAct" class="bg-emerald-600 text-white px-4 py-2 rounded">Add</button>
+        </div>
+
+        <button id="analyseBtn" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded" disabled>
+          Analyse
+        </button>
+
+        <div id="dashboard" class="hidden mt-6">
+          <h3 class="text-lg font-medium">Dashboard — <span id="dashDate"></span></h3>
+          <canvas id="pieChart"></canvas>
+          <canvas id="barChart"></canvas>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Firebase config -->
+  <script src="src/firebase-config.js"></script>
+
+  <!-- App Logic -->
+  <script src="src/app.js"></script>
+
+</body>
+
+</html>
